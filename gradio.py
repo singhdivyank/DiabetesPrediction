@@ -17,7 +17,7 @@ def diabetesApp(glucose: str, insulin: str, bmi: str, age: str) -> str:
         prediction made by classifier model
     """
 
-    classifier = pickle.load(file=open(file='classifier.pkl', mode='rb'))
+    classifier = pickle.load(file=open(file='app/classifier.pkl', mode='rb'))
     prediction = classifier.predict([[float(glucose), float(insulin), float(bmi), int(age)]])[0]
     return "Diabetic" if prediction else "Undiabetic"
 
