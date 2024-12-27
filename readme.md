@@ -27,7 +27,7 @@ Steps associated with the model deployment pipeline:
 
 API details
 
-1. method: GET
+1. method: POST
 2. endpoint: `/inputs`
 3. body: glucose (float), insulin (float), bmi (float), age (int)
 4. response: dict {"status": "diabetic/undiabetic"}
