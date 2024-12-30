@@ -12,7 +12,7 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
     };
     
     // TODO: replace with ECS endpoint
-    const apiUrl = `http://localhost:80/inputs`;
+    const apiUrl = ``;
     
     try {
       const response = await fetch(apiUrl, {
