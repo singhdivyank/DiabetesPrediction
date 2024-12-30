@@ -66,6 +66,14 @@ Follow the steps below to create and execute the RestAPI on your local server an
 
     b. `docker push <repository-name>`
 
+<div align="center">
+
+![](img/DockerHub.png)
+
+</div>
+
+<h4 style="text-align: center;">Figure3: push container to DockerHub</h4>
+
 7. query the endpoint on Postman
 
 <div align="center">
@@ -74,24 +82,56 @@ Follow the steps below to create and execute the RestAPI on your local server an
 
 </div>
 
-<h4 style="text-align: center;">Figure3: executing Docker image endpoint on Postman</h4>
+<h4 style="text-align: center;">Figure4: executing Docker image endpoint on Postman</h4>
 
 <div align="center">
-<br>
 
 ![](img/DockerExec.png)
 
 </div>
 
-<h4 style="text-align: center;">Figure4: Docker image execution status</h4>
+<h4 style="text-align: center;">Figure5: Docker image execution status</h4>
 
 ### Deployment
 
+Deploy Docker container on Elastic Container Service.
 
+Step1: Create `Task definitions`
+
+a. general configurations
+
+<h4 style="text-align: center;">Table2: Task definition configuration</h4>
+
+| Option | Chosen value | Reason |
+| ------ | ------------ | ------ |
+| Launch Type | AWS Fargate | serverless |
+| OS | Linux | see figure3 |
+| Architecture | ARM64 | choose for the OS of your local system, in my case MAC |
+| Task size | 1 CPU@2GB | executes smoothly on a lower memory size |
+| Task role | None | first time leave it None |
+
+b. Container details
+
+Update only the following fields:
+
+1. **Name**- any name
+2. **Image URI**- `singhdivyank7/xgbc-practice-aws:latest` (from DockerHub)
+3. **Essential Container**- Yes
+
+Step2: `Create cluster`. Assign any name and choose AWS Fargate infrastructure
+
+Step3: Create `Services`
+
+1. Do not change existing cluster name
+2. **Launch type**- AWS Fargate
+3. **Application type**- service
+4. **Service name**- any name
+
+Once created copy the `Public IP` and replace it in line15, `script.js`
 
 ## Website Integration
 
-Create a simple website in JavaScript fetauring a submit button to receeive 4 inputs (**features**). Integrate the ``fetch`` function to send a POST request at the endpoint hosted on ECS.
+Create a simple website in JavaScript fetauring a submit button to receive 4 inputs (**features**). Integrate the `fetch` function to send a POST request at the endpoint hosted on ECS.
 
 ```
 apiUrl = <url for aws ecs cluster>
